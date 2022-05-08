@@ -1,0 +1,23 @@
+{
+	"name": "Zartosht Test Cargo",
+	"dockerComposeFile": [
+		"deployments/develop/docker-compose.yml",
+		"deployments/develop/docker-compose.override.yml"
+	],
+	"service": "node",
+	"workspaceFolder": "/app",
+	"settings": {
+		"terminal.integrated.profiles.linux": {
+			"bash": {
+				"path": "/bin/ash"
+			}
+		}
+	},
+	"remoteUser": "node",
+	"extensions": [
+		"visualstudioexptteam.vscodeintellicode",
+		"esbenp.prettier-vscode",
+		"christian-kohler.npm-intellisense",
+		"dbaeumer.vscode-eslint"
+	]
+}

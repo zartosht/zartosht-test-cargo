@@ -1,0 +1,52 @@
+version: "3.7"
+
+volumes:
+  database:
+  vscode:
+  vscode-insiders:
+  node_modules:
+  redis:
+  redis.conf:
+
+networks:
+  web:
+
+services:
+  redis:
+    image: redis:alpine
+    command: redis-server --appendonly yes
+    restart: 'no'
+    volumes:
+      - redis:/var/lib/redis
+      - redis.conf:/usr/local/etc/redis/redis.conf
+    networks:
+      - web
+  node:
+    image: zartosht-cargo:test
+    build:
+      dockerfile: ./Dockerfile
+      context: .
+      args:
+        - NODE_VERSION=17
+    restart: 'no'
+    depends_on:
+      - postgres
+    volumes:
+      - ../../:/app
+      - node_modules:/app/node_modules
+      - vscode:/home/node/.vscode-server
+      - vscode-insiders:/home/node/.vscode-server-insiders
+    networks:
+      - web
+
+  postgres:
+    image: postgres:12-alpine
+    restart: 'no'
+    volumes:
+      - database:/var/lib/postgresql/data:z
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    networks:
+      - web

@@ -1,0 +1,22 @@
+version: "3.7"
+
+# networks:
+#   zartosht:
+#     external: true
+
+# services:
+#   postgres:
+#     ports:
+#       - "5432:5432"
+#     command: ["postgres", "-c", "log_statement=all"]
+#   redis:
+#     ports:
+#       - "6379:6379"
+#     command: ["postgres", "-c", "log_statement=all"]
+#   node:
+#     volumes:
+#       - ~/.netrc:/home/node/.netrc:ro
+#     networks:
+#       - zartosht
+#     ports:
+#       - "3001:3001"
